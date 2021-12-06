@@ -9,24 +9,13 @@ import { Button3 } from '../components/buttons/button-3.component';
 import { Button4 } from '../components/buttons/button-4.component';
 import { Button5 } from '../components/buttons/button-5.component';
 import { Button6 } from '../components/buttons/button-6.component';
-
-// import IconContainer from '../components/icons/icon-container.component';
-// import IconPlusBlue from '../components/icons/icon-plus-blue.component';
-// import IconPlusGray from '../components/icons/icon-plus-gray.component'
-// import IconCalendar from '../components/icon-calendar.component';
-// import CalendarWrapper from '../components/wrapper-calendar.component';
-
 import SelectPaymentTerms from '../components/select-paymentTerms/selectPaymentTerms.component';
-// import IssueDatePicker from '../components/issue-date-datePicker.component';
-// import CustomInput from '../temp';
 import { DatePicker } from '../components/datePicker/datePicker.component';
-
-
+import LogoStyled from '../components/nav/navbar-vertical-main/logo-styled.component';
 
 import { ReactComponent as IconSun } from '../assets/icon-sun.svg';
 import { ReactComponent as IconPlus } from '../assets/icon-plus.svg';
 import { ReactComponent as IconPlusGray } from '../assets/icon-plus-gray.svg';
-
 import { ReactComponent as IconArrowDown } from '../assets/icon-arrow-down.svg';
 import { ReactComponent as IconArrowLeft } from '../assets/icon-arrow-left.svg';
 import { ReactComponent as IconArrowRight } from '../assets/icon-arrow-right.svg';
@@ -39,7 +28,7 @@ import { ReactComponent as Logo } from '../assets/logo.svg';
 import Avatar1 from '../assets/image-avatar.jpg';
 
 import { theme } from '../theme';
-import LogoStyled from '../components/nav/navbar-vertical-main/logo-styled.component';
+
 
 const ContainerStyled = styled(Container)({
    display: 'flex',
@@ -106,8 +95,7 @@ const DesignSystemPartsDisplay = () => {
                Button5
                <Button5>Delete</Button5>
             </ContainerStyled2>
-         </ContainerStyled>
-         
+         </ContainerStyled>         
          
          <ContainerStyled>
             <ContainerStyled2>
@@ -170,16 +158,7 @@ const DesignSystemPartsDisplay = () => {
                   sx={{ width: 20, height: 20}} />
             </ContainerStyled2>
          </ContainerStyled>
-      </div>
-      
-        
-     
-     
-      
-      
-      
-      
-      
+      </div>      
    );
 };
 

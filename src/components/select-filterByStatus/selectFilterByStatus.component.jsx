@@ -12,18 +12,15 @@ const ButtonStlyed = styled(Button)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  minWidth: 140,
-  
+  minWidth: 140,  
   ...theme.typography.body1,
   fontWeight: 800,
-  textTransform: 'none',
-  
+  textTransform: 'none',  
 });
 
 const SelectStyled = styled(Menu)({
   width: '100%',
   backgroundColor: 'transparent',
-  // border: 'none',
 });
 
 const MenuItemStyled = styled(MenuItem)({
@@ -33,18 +30,11 @@ const MenuItemStyled = styled(MenuItem)({
 
 export default function SelectFilterByStatus({handleMenuSelect}) {
   const lightingContext = useContext(LightingContext);
-   const [lightingState, setLightingState] = useState(
-      lightingContext.lightingState.bg_lighting === 'light' ? 
-         theme.palette.common.dark_1 :
-         theme.palette.common.light_bg
-   );
+  const [lightingState, setLightingState] = useState({});
 
-   useEffect(() => {
-      setLightingState(
-         lightingContext.lightingState.bg_lighting === 'light' ? 
-            theme.palette.common.dark_1 :
-            theme.palette.common.light_bg);
-   }, [lightingContext.lightingState]);
+  useEffect(() => {
+    setLightingState(lightingContext.lightingState);
+  }, [lightingContext.lightingState]);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -62,13 +52,11 @@ export default function SelectFilterByStatus({handleMenuSelect}) {
   return (
     <>
       <ButtonStlyed
-        id="basic-button"
-        aria-controls="basic-menu"
-        aria-haspopup="true"
         aria-expanded={menuOpen ? 'true' : undefined}
         onClick={handleClick}
         style={{
-          color: `${lightingState}`,
+          color: lightingState.color,
+          backgroundColor: 'transparent'
         }}
         >
         Filter by status
@@ -87,7 +75,6 @@ export default function SelectFilterByStatus({handleMenuSelect}) {
         <MenuItemStyled onClick={() => menuClose('pending')}>Pending</MenuItemStyled>
         <MenuItemStyled onClick={() => menuClose('draft')}>Draft</MenuItemStyled>
       </SelectStyled>
-    </>
-    
+    </>    
   );
 }

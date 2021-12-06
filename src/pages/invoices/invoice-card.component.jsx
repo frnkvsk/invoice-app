@@ -1,152 +1,221 @@
-import React from 'react';
-
-import { Button, Card, Container, Box } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+// import { useHistory } from 'react-router';
+import { Card, Container, Paper  } from '@mui/material';
 import { styled } from '@mui/system';
 
-import { ReactComponent as IconArrow } from '../../assets/icon-arrow-right.svg';
 import { theme } from '../../theme';
+import TableOrders from '../../components/tables/table-orders.component';
+import { LightingContext } from '../../context/lighting.context';
 
-const CardStyled = styled(Card)({
+const ContainerHeading = styled(Container)({
    display: 'flex',
-   alignItems: 'center',
-   width: '100%',
-   minHeight: 90,
+   alignItems: 'flex-start',
+   justifyContent: 'space-between',
+
+   // margin: 5,
+   width: '98%',
    marginTop: 10,
+   marginLeft: 20,
+   marginRight: 20,
+   // minHeight: 90,
+   // 
+   // marginBottom: 10,
+   // border: '1px solid blue'
 });
-const CardContentStyled = styled(Box)({
+
+const ContainerInfo = styled(Container)({
    display: 'flex',
-   alignItems: 'center',
+   alignItems: 'flex-start',
    justifyContent: 'flex-start',
-   // justifyContent: 'center', 
    width: '100%',
-   paddingLeft: 10,
-   paddingRight: 0, 
-   height: '50%',
+   marginTop: 10,
+   marginBottom: 10,
+   // border: '1px solid orange'
+});
+
+const ContainerOrders = styled(Container)({
+   display: 'flex',
+   flexDirection: 'column',
+   alignItems: 'flex-start',
+   justifyContent: 'flex-start',
+   width: '100%',
+   marginTop: 10,
+   marginBottom: 10,
    // border: '1px solid green'
 });
-const ContainerIdStyled = styled(Container)({
+
+const Item = styled(Container)({
    ...theme.typography.body2,
-   width: '15%',
+   width: '45%',
+   minHeight: 150,
+   paddingTop: 15,
+   paddingLeft: 0,
+   // textAlign: 'left',
+   
+   // color: theme.palette.text.secondary,
    // border: '1px solid yellow'
-});
-const ContainerPaymentDateStyled = styled(Container)({
-   ...theme.typography.body2,
-   width: '20%',
-   // border: '1px solid orange'
-});
-const ContainerClientNameStyled = styled(Container)({
-   ...theme.typography.body2,
-   width: '20%',
-   // border: '1px solid yellow'
-});
-const ContainerTotalStyled = styled(Container)({
+ });
+
+const ItemBold = styled(Paper)({
    ...theme.typography.h3,
-   width: '20%',
-   // border: '1px solid orange'
-});
-const ContainerStatusStyled = styled(Container)({
-   ...theme.typography.h3,
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'center',
-   fontWeight: 700,
-   minWidth: 75,
-   width: '14%',
-   minHeight: '3.1em',
-   borderRadius: 4,
-   margin: 0,
-   padding: 0,
-});
-const IconDot = styled(Box)({
-   width: '0.5em',
-   height: '0.5em',
-   borderRadius: 25,
-   marginLeft: 0,
-   marginRight: '0.5em'   
+   paddingTop: 6,
+   paddingBottom: 6,
+   border: 'none',
+   boxShadow: 'none',
+   backgroundColor: 'transparent'
 });
 
-const ButtonArrow = styled(Button)({
-   width: 20,
-   margin: 0,
-   padding: 20,
-});
-
-const InvoiceCard = ({id, paymentDue, clientName, total, status}) => {
-   const statusColor = 
-      status === 'paid' ? 
-         {
-            color: theme.palette.common.invoice_paid, 
-            backgroundColor: theme.palette.common.invoice_paid_light
-         } : 
-      status === 'pending' ? 
-         {
-            color: theme.palette.common.invoice_pending, 
-            backgroundColor: theme.palette.common.invoice_pending_light
-         } : 
-         {
-            color: theme.palette.common.invoice_draft, 
-            backgroundColor: theme.palette.common.invoice_draft_light
-         };
-   // const Dot = 
-   //    status === 'paid' ? 
-   //       IconDotPaid : 
-   //    status === 'pending' ? 
-   //       IconDotPending : 
-   //       IconDotDraft; 
+const dateFormat = (dateIn) => {
    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-   const dateArr = paymentDue.split('-');
-   const dueDate = `${dateArr[2]} ${months[+dateArr[1]]} ${dateArr[0]}`
+   const dateArr = dateIn.split('-');
+   return `${dateArr[2]} ${months[+dateArr[1]]} ${dateArr[0]}`;
+}
+
+const InvoiceCard = ({id, description, createdAt, paymentDue, senderAddress, clientName, total, status, items,clientAddress, clientEmail}) => {
+   // const history = useHistory();  
+   const lightingContext = useContext(LightingContext);
+   const [lightingState, setLightingState] = useState({});
+
+   useEffect(() => {
+      setLightingState(lightingContext.lightingState);
+         // lightingContext.lightingState.bg_lighting === 'light' ? 
+         // {
+         //    color: theme.palette.common.dark_4,
+         //    backgroundColor: '#fff'
+         // } :
+         // {
+         //    color: theme.palette.common.light_bg,
+         //    backgroundColor: theme.palette.common.dark_4,
+
+         // })
+   }, [lightingContext.lightingState]);
+
+   console.log('InvoiceCard lightingState',lightingState)
+   console.log('InvoiceCard lightingContext',lightingContext)
    return (
-      <CardStyled key={id}>
-         <CardContentStyled>
-            <ContainerIdStyled>{id}</ContainerIdStyled>
-            <ContainerPaymentDateStyled>Due {dueDate}</ContainerPaymentDateStyled>
-            <ContainerClientNameStyled>{clientName}</ContainerClientNameStyled>
-            <ContainerTotalStyled>{Intl.NumberFormat('en-US', {style: 'currency', currency: 'GBP'}).format(Number(total))}</ContainerTotalStyled>
+      <Card 
+         sx={{ 
+            width: 1,
+            padding: 3,
+            border: 'none',
+            boxShadow: 'none',
+            ...lightingState
+         }}>
+         <ContainerHeading>
+            <div>
+               <ItemBold 
+                  style={{...lightingState}}>#{id}</ItemBold>
+               <div>{description}</div>
+            </div>
+            <div>
+               <div>{senderAddress.street}</div>
+               <div>{senderAddress.city}</div>
+               <div>{senderAddress.postCode}</div>
+               <div>{senderAddress.country}</div>
+            </div>
+         </ContainerHeading>
+
+         <ContainerInfo>
             
-            <ContainerStatusStyled
-               style={{
-                  ...statusColor
-               }}>
-               
-               <IconDot
-                  style={{
-                     backgroundColor: statusColor.color, 
-                     padding: 0,
-                     // margin: 0
-                  }} />
-                  {status.charAt(0).toUpperCase()+status.slice(1)}
-            </ContainerStatusStyled>
-            <ButtonArrow>
-               <IconArrow style={{transform: 'scale(1.2, 1.2)'}}/>
-            </ButtonArrow>
-            
-         </CardContentStyled>
-      </CardStyled>
+            <Item>
+               <div>
+                  <div>Invoice Date</div>
+                  <ItemBold 
+                  style={{...lightingState}}>{dateFormat(createdAt)}</ItemBold>
+               </div>
+               <div>
+                  <div style={{marginTop: 15}}>Payment Due</div>
+                  <ItemBold 
+                  style={{...lightingState}}>{dateFormat(paymentDue)}</ItemBold>
+               </div>
+            </Item>
+            <Item>
+               <div>Bill To</div>
+               <ItemBold 
+                  style={{...lightingState}}>{clientName}</ItemBold>
+               <div>{clientAddress.street}</div>
+               <div>{clientAddress.city}</div>
+               <div>{clientAddress.postCode}</div>
+               <div>{clientAddress.country}</div>
+            </Item>
+            <Item sx={{ width: 1 }}>
+               <div>Send To</div>
+               <ItemBold 
+                  style={{...lightingState}}>{clientEmail}</ItemBold>
+            </Item>
+         </ContainerInfo>
+
+         <ContainerOrders>
+            <TableOrders header={['Item Name', 'Qty.', 'Price', 'Total']} rows={items} total={total} />
+         </ContainerOrders>
+      </Card>
    );
 }
 
 export default InvoiceCard;
 
-/*
-<Dot 
-                  style={{
-                     paddingBottom: '11%',
-                     transform: 'scale(1rem, 1rem)'
-                  }}/>
+/**
+ * 
+ * 
+ * <ContainerOrders>
+            <ContainerOrdersList>
+            </ContainerOrdersList>
 
-<ContainerStatusStyled
-               style={{
-                  color: statusColor
-               }}>
-               <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '5rem',
-                  fontSize: '5rem',
-                  lineHeight: '-20%',
-                  border: '1px solid blue'}}>.</div> 
-               {status}</ContainerStatusStyled>
+            <ContainerOrdersTotals>
+               <div>Amount Due</div>
+               <div>{total}</div>
+            </ContainerOrdersTotals>
+         </ContainerOrders>
+
+
+
+ * <CardStyled key={id}>
+      
+         <CardContentStyled>
+           
+            
+            
          </CardContentStyled>
-*/
+      </CardStyled>
+ * 
+ * 
+ * 
+ * {
+    "id": "XM9141",
+    "createdAt": "2021-08-21",
+    "paymentDue": "2021-09-20",
+    "description": "Graphic Design",
+    "paymentTerms": 30,
+    "clientName": "Alex Grim",
+    "clientEmail": "alexgrim@mail.com",
+    "status": "pending",
+    "senderAddress": {
+      "street": "19 Union Terrace",
+      "city": "London",
+      "postCode": "E1 3EZ",
+      "country": "United Kingdom"
+    },
+    "clientAddress": {
+      "street": "84 Church Way",
+      "city": "Bradford",
+      "postCode": "BD1 9PB",
+      "country": "United Kingdom"
+    },
+    "items": [
+      {
+        "name": "Banner Design",
+        "quantity": 1,
+        "price": 156.00,
+        "total": 156.00
+      },
+      {
+        "name": "Email Design",
+        "quantity": 2,
+        "price": 200.00,
+        "total": 400.00
+      }
+    ],
+    "total": 556.00
+  },
+ * 
+ */

@@ -1,23 +1,41 @@
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import { theme } from '../../theme';
+import React, { useEffect, useContext, useState } from 'react';
 
-export const Button3 = styled(Button)({
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'space-around',
-   width: 'auto',
-   height: 40,
-   padding: 5,
-   fontSize: 15,
-   fontWeight: 'normal',
-   color: theme.palette.secondary.main,
-   backgroundColor: theme.palette.common.light_bg,
-   textTransform: 'none',
-   border: 'none',
-   borderRadius: 30,
-   minWidth: 75,
-   '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-   }
-});
+import { theme } from '../../theme';
+import { ButtonBase } from './button-base.component';
+import { LightingContext } from '../../context/lighting.context';
+
+const Button3 = ({children, clickHandler}) => {
+   const lightingContext = useContext(LightingContext);
+   const [lightingState, setLightingState] = useState({});
+   
+   useEffect(() => {
+      setLightingState(
+         lightingContext.lightingState.bg_lighting === 'light' ? 
+         {
+            color: theme.palette.secondary.main,
+            backgroundColor: theme.palette.common.light_bg,
+            '&:hover': {
+               backgroundColor: theme.palette.secondary.light
+            }
+         } :
+         {
+            color: theme.palette.secondary.light,
+            backgroundColor: theme.palette.common.dark_1,
+            '&:hover': {
+               color: theme.palette.secondary.main,
+               backgroundColor: theme.palette.secondary.light
+            }
+         }
+      )
+   }, [lightingContext.lightingState.bg_lighting]);
+   
+   return (
+      <ButtonBase
+         otherStyles={lightingState}
+         clickHandler={clickHandler}
+         children={children} /> 
+   );
+   
+};
+
+export default Button3;

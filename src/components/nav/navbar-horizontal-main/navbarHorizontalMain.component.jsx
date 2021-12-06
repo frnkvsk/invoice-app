@@ -4,15 +4,21 @@ import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
+// import Slide from '@mui/material/Slide';
+
+
 
 import { theme } from '../../../theme';
 
 import { LightingContext } from '../../../context/lighting.context';
 import Button1 from '../../../components/buttons/button-1.component';
 import SelectFilterByStatus from '../../select-filterByStatus/selectFilterByStatus.component';
+// import FormNewInvoice from '../../forms/formNewInvoice.component';
+
+
 
 const AppBarStyled = styled(AppBar)({
-   position: 'static',
+   position: 'relative',
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
@@ -20,13 +26,8 @@ const AppBarStyled = styled(AppBar)({
    height: 70,
    marginTop: 40,
    backgroundColor: 'transparent',
-   
-   // paddingLeft: 20,
-   // border: '1px solid pink',
-   boxShadow: 'none'
-   // borderTopRightRadius: 25,
-   // borderBottomRightRadius: 25,
-
+   boxShadow: 'none',
+   zIndex: 1
 });
 
 
@@ -35,11 +36,7 @@ const ToolBarStyled = styled(Box)({
    alignItems: 'center',
    justifyContent: 'space-between',
    width: '50%',
-   // height: '100vh',
    paddingLeft: 0,
-   // border: '1px solid blue',
-   // boxShadow: 'none'
-   // disableGutters: true,
 });
 
 const Heading = styled(Typography)({
@@ -49,49 +46,67 @@ const SubHeading = styled(Typography)({
    ...theme.typography.body1,
 });
 
-export default function NavbarHorizontalMain({handleMenuSelect}) {
+export default function NavbarHorizontalMain({handleMenuSelect, invoiceCount, handleNewInvoiceFormOpenClose}) {
+   const containerRef = React.useRef(null);
+
+   
+  
+
+   
    const lightingContext = useContext(LightingContext);
-   const [lightingState, setLightingState] = useState(
-      lightingContext.lightingState.bg_lighting === 'light' ? 
-         theme.palette.common.dark_1 :
-         theme.palette.common.light_bg
+   const [lightingState, setLightingState] = useState({}
+      // lightingContext.lightingState.bg_lighting === 'light' ? 
+      //    theme.palette.common.dark_1 :
+      //    theme.palette.common.light_bg
    );
 
    useEffect(() => {
-      setLightingState(
-         lightingContext.lightingState.bg_lighting === 'light' ? 
-            theme.palette.common.dark_1 :
-            theme.palette.common.light_bg);
+      setLightingState(lightingContext.lightingState);
+         // lightingContext.lightingState.bg_lighting === 'light' ? 
+         //    theme.palette.common.dark_1 :
+         //    theme.palette.common.light_bg);
    }, [lightingContext.lightingState]);
 
 
    const buttonClickHandler = () => {
-      console.log('button1 clicked')
+      console.log('NavbarHorizontalMain button1 New Invoice clicked')
+      console.log('lightingState',lightingState)
+      handleNewInvoiceFormOpenClose();
    }
-   // console.log('NavbarHorizontalMain lightingState:',lightingState)
-   return (      
-      <AppBarStyled>
-         <ToolBarStyled>
-            <div style={{color: lightingState}}>
-               <Heading>Invoices</Heading>
-               <SubHeading>No invoices</SubHeading>
-            </div>
-            <div
-               style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '42%',
-                  // border: '1px solid green'
-               }}>
-               <SelectFilterByStatus handleMenuSelect={handleMenuSelect}/>
-               <Button1 clickHandler={buttonClickHandler} />
-            </div>
-            
-            
-                        
-         </ToolBarStyled>    
-      </AppBarStyled>
+   
+   return (    
+      <>
+      
+         <AppBarStyled
+            ref={containerRef}
+            >
+            <ToolBarStyled>
+               <div style={{...lightingState}}>
+                  <Heading
+                     style={{...lightingState}}>Invoices</Heading>
+                  {invoiceCount > 0 ?
+                     <SubHeading>There are {invoiceCount} total invoices</SubHeading>
+                     :
+                     <SubHeading>No invoices</SubHeading>
+                  }
+                  
+               </div>
+               <div
+                  style={{
+                     display: 'flex',
+                     alignItems: 'center',
+                     justifyContent: 'space-between',
+                     width: '42%',
+                  }}>
+                  <SelectFilterByStatus handleMenuSelect={handleMenuSelect}/>
+                  <Button1 clickHandler={buttonClickHandler} />
+               </div>                        
+            </ToolBarStyled>    
+         </AppBarStyled> 
+         
+      
+      </>
+
       
    );
 }

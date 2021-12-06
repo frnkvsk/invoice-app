@@ -10,8 +10,8 @@ const Wrapper1 = styled(Box)({
    display: 'flex',
    alignItems: 'flex-end',
    justifyContent: 'flex-start',
-   width: 75,
-   height: 75,
+   width: 100,
+   height: 100,
    margin: 0,
    padding: 0,
    backgroundColor: theme.palette.primary.main,
@@ -20,8 +20,8 @@ const Wrapper1 = styled(Box)({
 });
 const Wrapper2 = styled(Box)({
    display: 'flex',
-   width: 75,
-   height: 37,
+   width: 100,
+   height: 55,
    margin: 0,
    padding: 0,
    backgroundColor: theme.palette.primary.light,
@@ -31,10 +31,11 @@ const Wrapper2 = styled(Box)({
 
 const IconLogoStyled = styled(IconLogo)({
    position: 'relative',
-   top: -13,
-   left: 25,
+   top: -11,
+   left: 38,
    margin: 0,
    padding: 0,
+   transform: 'scale(1.5)'
 });
 
 export default function LogoStyled() {

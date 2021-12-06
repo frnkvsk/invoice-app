@@ -1,32 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import Popup from 'reactjs-popup';
+
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import { Button, InputLabel } from '@mui/material';
+
 import { theme } from '../../theme';
 import { ReactComponent as IconCalendar} from '../../assets/icon-calendar.svg';
 import DatePickerPopup from './popup-calendar.component';
-import Popup from 'reactjs-popup';
-
+import { Box } from '@mui/system';
 
 const DatePickerStyled = styled(Button)({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-between',
-   width: 250,
-   height: 40,
+   width: 180,
+   height: 30,
    padding: '0 15px',
-   fontSize: 15,
-   fontWeight: 'bold',
+   fontSize: 12,
+   fontWeight: 'normal',
    color: theme.palette.common.dark_2,
    backgroundColor: 'transparent',
    textTransform: 'none',
-   border: `1px solid ${theme.palette.primary.main}`,
+   border: `1px solid ${theme.palette.secondary.main}83`,
    borderRadius: 5,
    '&:hover': {
       backgroundColor: theme.palette.secondary.light
    }
 });
-
-const DatePicker = () => {
+const StyledContainer = styled(Box)({
+   display: 'flex',
+   flexDirection: 'column',
+   margin: 0,
+   padding: 0,
+ });
+const DatePicker = (props) => {
+   const handleChange = props.handleChange;
    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov', 'Dec'];
    
    const initialDate = (date = new Date()) => {
@@ -61,25 +70,36 @@ const DatePicker = () => {
          });
       }
    } 
+
+   useEffect(() => {
+      handleChange(Object.entries(dateSelected));
+   }, [dateSelected])
    
    return (
+      <StyledContainer>
+      <InputLabel 
+         htmlFor='datePicker'
+         style={{fontSize: 13}} >Invoice Date</InputLabel>
       <Popup
          trigger={
             <DatePickerStyled>
                {`${dateSelected.day} ${dateSelected.monthStr} ${dateSelected.year}`}
                <IconCalendar />
-            </DatePickerStyled>}
+            </DatePickerStyled>
+         }
          position='bottom center'
          on='click'
          style={{border: '1px solid green'}}
          >               
          <DatePickerPopup 
+            id='datePicker'
             dateSelected={dateSelected} 
             setDateSelected={setNewDate}
             style={{border: '1px solid green'}}
          />
       </Popup>   
+      </StyledContainer>
    );
 };
 
-export { DatePicker };
+export default DatePicker;
