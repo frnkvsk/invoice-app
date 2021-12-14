@@ -11,17 +11,17 @@ import DatePickerPopup from './popup-calendar.component';
 import { Box } from '@mui/system';
 
 const DatePickerStyled = styled(Button)({
+   ...theme.typography.body2,
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-between',
    width: 180,
    height: 30,
    padding: '0 15px',
-   fontSize: 12,
-   fontWeight: 'normal',
    color: theme.palette.common.dark_2,
    backgroundColor: 'transparent',
    textTransform: 'none',
+   marginBottom: 7,
    border: `1px solid ${theme.palette.secondary.main}83`,
    borderRadius: 5,
    '&:hover': {
@@ -73,13 +73,15 @@ const DatePicker = (props) => {
 
    useEffect(() => {
       handleChange(Object.entries(dateSelected));
-   }, [dateSelected])
+   }, [handleChange, dateSelected])
    
    return (
       <StyledContainer>
       <InputLabel 
          htmlFor='datePicker'
-         style={{fontSize: 13}} >Invoice Date</InputLabel>
+         style={{
+            ...theme.typography.body2,
+         }} >Invoice Date</InputLabel>
       <Popup
          trigger={
             <DatePickerStyled>

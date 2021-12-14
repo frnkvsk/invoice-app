@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router';
 import { Button, Card, Container, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
+import { LightingContext } from '../../context/lighting.context';
 import { ReactComponent as IconArrow } from '../../assets/icon-arrow-right.svg';
 import { theme } from '../../theme';
 import Status from '../../components/status/status.component';
@@ -12,7 +13,7 @@ const CardStyled = styled(Card)({
    alignItems: 'center',
    width: '100%',
    minHeight: 90,
-   marginTop: 10,
+   marginTop: 10,   
 });
 const CardContentStyled = styled(Box)({
    display: 'flex',
@@ -49,14 +50,30 @@ const ButtonArrow = styled(Button)({
 const InvoiceListCard = ({id, paymentDue, clientName, total, status}) => {
    const history = useHistory();
    
+   const lightingContext = useContext(LightingContext);
+   const [lightingState, setLightingState] = useState(lightingContext.lightingState);
+
+   useEffect(() => {
+      setLightingState(lightingContext.lightingState);
+   }, [lightingContext.lightingState]);
+
    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
    const dateArr = paymentDue.split('-');
    const dueDate = `${dateArr[2]} ${months[+dateArr[1]]} ${dateArr[0]}`;
-
+   
    return (
-      <CardStyled key={id}>      
+      <CardStyled 
+         key={id}
+         style={{
+            ...lightingState.color_6,       
+         }}>      
          <CardContentStyled>
-            <ContainerIdStyled>{id}</ContainerIdStyled>
+            <ContainerIdStyled>
+               <span style={{
+                  color: theme.palette.primary.light,
+                  ...theme.typography.body1
+               }}>#</span>{id}
+            </ContainerIdStyled>
             <ContainerPaymentDateStyled>Due {dueDate}</ContainerPaymentDateStyled>
             <ContainerClientNameStyled>{clientName}</ContainerClientNameStyled>
             <ContainerTotalStyled>{Intl.NumberFormat('en-US', {style: 'currency', currency: 'GBP'}).format(Number(total))}</ContainerTotalStyled>

@@ -1,21 +1,14 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-// import Slide from '@mui/material/Slide';
-
-
 
 import { theme } from '../../../theme';
-
 import { LightingContext } from '../../../context/lighting.context';
 import Button1 from '../../../components/buttons/button-1.component';
 import SelectFilterByStatus from '../../select-filterByStatus/selectFilterByStatus.component';
-// import FormNewInvoice from '../../forms/formNewInvoice.component';
-
-
 
 const AppBarStyled = styled(AppBar)({
    position: 'relative',
@@ -47,49 +40,32 @@ const SubHeading = styled(Typography)({
 });
 
 export default function NavbarHorizontalMain({handleMenuSelect, invoiceCount, handleNewInvoiceFormOpenClose}) {
-   const containerRef = React.useRef(null);
-
-   
-  
-
-   
+   const containerRef = React.useRef(null);   
    const lightingContext = useContext(LightingContext);
-   const [lightingState, setLightingState] = useState({}
-      // lightingContext.lightingState.bg_lighting === 'light' ? 
-      //    theme.palette.common.dark_1 :
-      //    theme.palette.common.light_bg
-   );
+   const [lightingState, setLightingState] = useState(lightingContext.lightingState);
 
    useEffect(() => {
       setLightingState(lightingContext.lightingState);
-         // lightingContext.lightingState.bg_lighting === 'light' ? 
-         //    theme.palette.common.dark_1 :
-         //    theme.palette.common.light_bg);
    }, [lightingContext.lightingState]);
 
 
    const buttonClickHandler = () => {
-      console.log('NavbarHorizontalMain button1 New Invoice clicked')
-      console.log('lightingState',lightingState)
       handleNewInvoiceFormOpenClose();
    }
    
    return (    
-      <>
-      
+      <>      
          <AppBarStyled
             ref={containerRef}
             >
             <ToolBarStyled>
-               <div style={{...lightingState}}>
-                  <Heading
-                     style={{...lightingState}}>Invoices</Heading>
+               <div>
+                  <Heading style={{...lightingState.color_1}}>Invoices</Heading>
                   {invoiceCount > 0 ?
-                     <SubHeading>There are {invoiceCount} total invoices</SubHeading>
+                     <SubHeading style={{...lightingState.color_1}}>There are {invoiceCount} total invoices</SubHeading>
                      :
-                     <SubHeading>No invoices</SubHeading>
-                  }
-                  
+                     <SubHeading style={{...lightingState.color_1}}>No invoices</SubHeading>
+                  }                  
                </div>
                <div
                   style={{
@@ -102,11 +78,7 @@ export default function NavbarHorizontalMain({handleMenuSelect, invoiceCount, ha
                   <Button1 clickHandler={buttonClickHandler} />
                </div>                        
             </ToolBarStyled>    
-         </AppBarStyled> 
-         
-      
+         </AppBarStyled>     
       </>
-
-      
    );
 }

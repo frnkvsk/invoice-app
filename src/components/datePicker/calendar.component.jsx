@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -6,12 +7,12 @@ import Paper from '@mui/material/Paper';
 import { theme } from '../../theme';
 
 const ItemActive = styled(Paper)({
+   ...theme.typography.body2,
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
    height: 15,
    width: 15,
-   fontSize: 12,
    margin: 7,
    boxShadow: 'none',
    '&:hover': {
@@ -19,12 +20,12 @@ const ItemActive = styled(Paper)({
    },
 });
 const ItemInactive = styled(Paper)({
+   ...theme.typography.body2,
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
    height: 15,
    width: 15,
-   fontSize: 12,
    margin: 7,
    boxShadow: 'none',
    opacity: 0.2
@@ -33,8 +34,6 @@ const ItemInactive = styled(Paper)({
 const BoxStyled = styled(Box)({
    display: 'flex',
    width: '100%',
-   // border: '1px solid green',
-   // padding: 10,
 });
 
 export default function Calendar({dateSelected, setDateSelected}) {

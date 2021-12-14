@@ -13,7 +13,7 @@ const ButtonStlyed = styled(Button)({
   alignItems: 'center',
   justifyContent: 'space-between',
   minWidth: 140,  
-  ...theme.typography.body1,
+  ...theme.typography.body2,
   fontWeight: 800,
   textTransform: 'none',  
 });
@@ -30,7 +30,7 @@ const MenuItemStyled = styled(MenuItem)({
 
 export default function SelectFilterByStatus({handleMenuSelect}) {
   const lightingContext = useContext(LightingContext);
-  const [lightingState, setLightingState] = useState({});
+  const [lightingState, setLightingState] = useState(lightingContext.lightingState);
 
   useEffect(() => {
     setLightingState(lightingContext.lightingState);
@@ -55,8 +55,7 @@ export default function SelectFilterByStatus({handleMenuSelect}) {
         aria-expanded={menuOpen ? 'true' : undefined}
         onClick={handleClick}
         style={{
-          color: lightingState.color,
-          backgroundColor: 'transparent'
+          ...lightingState.color_1
         }}
         >
         Filter by status

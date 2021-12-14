@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { useHistory } from 'react-router';
+
 import { Card, Container, Paper  } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -10,17 +10,11 @@ import { LightingContext } from '../../context/lighting.context';
 const ContainerHeading = styled(Container)({
    display: 'flex',
    alignItems: 'flex-start',
-   justifyContent: 'space-between',
-
-   // margin: 5,
+   justifyContent: 'space-between',   
    width: '98%',
    marginTop: 10,
    marginLeft: 20,
-   marginRight: 20,
-   // minHeight: 90,
-   // 
-   // marginBottom: 10,
-   // border: '1px solid blue'
+   marginRight: 20,     
 });
 
 const ContainerInfo = styled(Container)({
@@ -30,7 +24,6 @@ const ContainerInfo = styled(Container)({
    width: '100%',
    marginTop: 10,
    marginBottom: 10,
-   // border: '1px solid orange'
 });
 
 const ContainerOrders = styled(Container)({
@@ -41,7 +34,6 @@ const ContainerOrders = styled(Container)({
    width: '100%',
    marginTop: 10,
    marginBottom: 10,
-   // border: '1px solid green'
 });
 
 const Item = styled(Container)({
@@ -50,10 +42,6 @@ const Item = styled(Container)({
    minHeight: 150,
    paddingTop: 15,
    paddingLeft: 0,
-   // textAlign: 'left',
-   
-   // color: theme.palette.text.secondary,
-   // border: '1px solid yellow'
  });
 
 const ItemBold = styled(Paper)({
@@ -71,27 +59,14 @@ const dateFormat = (dateIn) => {
    return `${dateArr[2]} ${months[+dateArr[1]]} ${dateArr[0]}`;
 }
 
-const InvoiceCard = ({id, description, createdAt, paymentDue, senderAddress, clientName, total, status, items,clientAddress, clientEmail}) => {
-   // const history = useHistory();  
+const InvoiceCard = ({id, description, createdAt, paymentDue, senderAddress, clientName, total, status, items,clientAddress, clientEmail}) => { 
    const lightingContext = useContext(LightingContext);
-   const [lightingState, setLightingState] = useState({});
+   const [lightingState, setLightingState] = useState(lightingContext.lightingState);
 
    useEffect(() => {
       setLightingState(lightingContext.lightingState);
-         // lightingContext.lightingState.bg_lighting === 'light' ? 
-         // {
-         //    color: theme.palette.common.dark_4,
-         //    backgroundColor: '#fff'
-         // } :
-         // {
-         //    color: theme.palette.common.light_bg,
-         //    backgroundColor: theme.palette.common.dark_4,
-
-         // })
    }, [lightingContext.lightingState]);
 
-   console.log('InvoiceCard lightingState',lightingState)
-   console.log('InvoiceCard lightingContext',lightingContext)
    return (
       <Card 
          sx={{ 
@@ -99,15 +74,24 @@ const InvoiceCard = ({id, description, createdAt, paymentDue, senderAddress, cli
             padding: 3,
             border: 'none',
             boxShadow: 'none',
-            ...lightingState
-         }}>
+            ...lightingState.color_6,
+         }}
+         >
          <ContainerHeading>
             <div>
-               <ItemBold 
-                  style={{...lightingState}}>#{id}</ItemBold>
-               <div>{description}</div>
+               <ItemBold style={{...lightingState.color_6}}>
+                  <span style={{color: theme.palette.secondary.main}}>#</span>{id}</ItemBold>
+               <div
+                  style={{
+                     ...lightingState.color_7,
+                     ...theme.typography.body2
+                  }}>Graphic Design</div>
             </div>
-            <div>
+            <div 
+               style={{
+                  ...lightingState.color_7,
+                  ...theme.typography.body2,
+                  textAlign: 'right', }}>
                <div>{senderAddress.street}</div>
                <div>{senderAddress.city}</div>
                <div>{senderAddress.postCode}</div>
@@ -115,107 +99,57 @@ const InvoiceCard = ({id, description, createdAt, paymentDue, senderAddress, cli
             </div>
          </ContainerHeading>
 
-         <ContainerInfo>
-            
+         <ContainerInfo>            
             <Item>
                <div>
-                  <div>Invoice Date</div>
+                  <div 
+                     style={{
+                        ...lightingState.color_7
+                     }}>Invoice Date</div>
                   <ItemBold 
-                  style={{...lightingState}}>{dateFormat(createdAt)}</ItemBold>
+                     style={{
+                        ...lightingState.color_6
+                     }}>{dateFormat(createdAt)}</ItemBold>
                </div>
                <div>
-                  <div style={{marginTop: 15}}>Payment Due</div>
+                  <div 
+                     style={{
+                        ...lightingState.color_7,
+                         marginTop: 15
+                     }}>Payment Due</div>
                   <ItemBold 
-                  style={{...lightingState}}>{dateFormat(paymentDue)}</ItemBold>
+                     style={{
+                        ...lightingState.color_6
+                     }}>{dateFormat(paymentDue)}</ItemBold>
                </div>
             </Item>
             <Item>
-               <div>Bill To</div>
+               <div 
+                  style={{
+                     ...lightingState.color_7
+                  }}>Bill To</div>
                <ItemBold 
-                  style={{...lightingState}}>{clientName}</ItemBold>
+                  style={{...lightingState.color_6}}>{clientName}</ItemBold>
                <div>{clientAddress.street}</div>
                <div>{clientAddress.city}</div>
                <div>{clientAddress.postCode}</div>
                <div>{clientAddress.country}</div>
             </Item>
             <Item sx={{ width: 1 }}>
-               <div>Send To</div>
+               <div 
+                  style={{
+                     ...lightingState.color_7
+                  }}>Sent To</div>
                <ItemBold 
-                  style={{...lightingState}}>{clientEmail}</ItemBold>
+                  style={{...lightingState.color_6}}>{clientEmail}</ItemBold>
             </Item>
          </ContainerInfo>
 
          <ContainerOrders>
-            <TableOrders header={['Item Name', 'Qty.', 'Price', 'Total']} rows={items} total={total} />
+            <TableOrders header={['Item Name', 'QTY.', 'Price', 'Total']} rows={items} total={total} />
          </ContainerOrders>
       </Card>
    );
 }
 
 export default InvoiceCard;
-
-/**
- * 
- * 
- * <ContainerOrders>
-            <ContainerOrdersList>
-            </ContainerOrdersList>
-
-            <ContainerOrdersTotals>
-               <div>Amount Due</div>
-               <div>{total}</div>
-            </ContainerOrdersTotals>
-         </ContainerOrders>
-
-
-
- * <CardStyled key={id}>
-      
-         <CardContentStyled>
-           
-            
-            
-         </CardContentStyled>
-      </CardStyled>
- * 
- * 
- * 
- * {
-    "id": "XM9141",
-    "createdAt": "2021-08-21",
-    "paymentDue": "2021-09-20",
-    "description": "Graphic Design",
-    "paymentTerms": 30,
-    "clientName": "Alex Grim",
-    "clientEmail": "alexgrim@mail.com",
-    "status": "pending",
-    "senderAddress": {
-      "street": "19 Union Terrace",
-      "city": "London",
-      "postCode": "E1 3EZ",
-      "country": "United Kingdom"
-    },
-    "clientAddress": {
-      "street": "84 Church Way",
-      "city": "Bradford",
-      "postCode": "BD1 9PB",
-      "country": "United Kingdom"
-    },
-    "items": [
-      {
-        "name": "Banner Design",
-        "quantity": 1,
-        "price": 156.00,
-        "total": 156.00
-      },
-      {
-        "name": "Email Design",
-        "quantity": 2,
-        "price": 200.00,
-        "total": 400.00
-      }
-    ],
-    "total": 556.00
-  },
- * 
- */

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Container, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
+import { LightingContext } from '../../context/lighting.context';
 import { theme } from '../../theme';
 
 
@@ -13,8 +14,6 @@ const ContainerStatusStyled = styled(Container)({
    justifyContent: 'center',
    fontWeight: 700,
    minWidth: 70,
-   // width: 'auto',
-   // minHeight: '3.1em',
    borderRadius: 4,
    margin: 0,
    padding: 0,
@@ -30,7 +29,13 @@ const IconDot = styled(Box)({
 
 
 const Status = ({status, width, height}) => {
-   console.log('Status.status:',status,width,height)
+   const lightingContext = useContext(LightingContext);
+   const [lightingState, setLightingState] = useState(lightingContext.lightingState);  
+
+   useEffect(() => {
+      setLightingState(lightingContext.lightingState);
+   }, [lightingContext.lightingState]);
+
    const statusColor = 
       status === 'paid' ? 
          {
@@ -43,8 +48,7 @@ const Status = ({status, width, height}) => {
             backgroundColor: theme.palette.common.invoice_pending_light
          } : 
          {
-            color: theme.palette.common.invoice_draft, 
-            backgroundColor: theme.palette.common.invoice_draft_light
+            ...lightingState.color_3
          };
    
    
@@ -60,7 +64,6 @@ const Status = ({status, width, height}) => {
             style={{
                backgroundColor: statusColor.color, 
                padding: 0,
-               // margin: 0
             }} />
             {status.charAt(0).toUpperCase()+status.slice(1)}
       </ContainerStatusStyled>

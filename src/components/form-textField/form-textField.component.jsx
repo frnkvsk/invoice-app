@@ -1,22 +1,15 @@
 import React from 'react';
 
 import { InputLabel, TextField } from '@mui/material';
-import { withStyles } from '@mui/styles';
+import { theme } from '../../theme';
 
-const styles = {
-   div: {
-      fontSize: 12, 
-   },
-   input: {
-      height: 10,
-      fontSize: '0.8em',      
-   },
-}
 const FormTextField = (props) => (
    <div style={{fontSize: 12}}>
       <InputLabel 
          htmlFor={props.id}
-         style={{fontSize: '0.8em'}}   
+         style={{
+            ...theme.typography.body2
+         }}   
       >{props.label}</InputLabel>
       <TextField         
          variant='outlined'
@@ -24,8 +17,13 @@ const FormTextField = (props) => (
          id={props.id}
          value={props.value}
          onChange={e => props.handleChange(e.target.value)}
-         inputProps={{ classes: { input: props.classes.input}}}
+         inputProps={{ style: { 
+            ...theme.typography.body2,
+            height: 10,
+         }}}
          style={{
+            ...theme.typography.body2,
+            fontSize: 11.8,
             padding: 0,
             margin: 0,
             width: props.width,
@@ -35,4 +33,4 @@ const FormTextField = (props) => (
    </div>
 );
 
-export default withStyles(styles)(FormTextField);
+export default FormTextField;

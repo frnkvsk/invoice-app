@@ -16,30 +16,27 @@ function App() {
 
   useEffect(() => {
     setLightingState(lightingContext.lightingState);
-    // setLightingState(lightingContext.lightingState.bg_lighting === 'light' ? theme.palette.common.light_bg : theme.palette.common.dark_1);
- }, [lightingContext.lightingState]);
+  }, [lightingContext.lightingState]);
 
-  return (
-  
+  return (  
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Navbar />
-        <Switch>
-          <Container maxWidth='false'
+        <Container maxWidth='false'
             style={{
               display: 'flex',
               justifyContent: 'center',
-              backgroundColor: lightingState,
-              // border: '1px solid red'
+              ...lightingState.color_1
             }}>
+          <Switch>          
             <Route exact path='/'>
               <InvoiceList />
             </Route>
             <Route exact path='/invoice/:id'>
               <Invoice />
-            </Route>
-          </Container>          
-        </Switch>
+            </Route>                   
+          </Switch>
+        </Container> 
       </BrowserRouter>        
     </ThemeProvider>      
   );

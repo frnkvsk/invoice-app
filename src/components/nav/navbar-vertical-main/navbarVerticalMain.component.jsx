@@ -25,7 +25,6 @@ const AppBarStyled = styled(AppBar)({
    zIndex: 100
 });
 
-
 const ToolBarStyled = styled(Box)({
    display: 'flex',
    flexDirection: 'column',
@@ -34,11 +33,7 @@ const ToolBarStyled = styled(Box)({
    width: 'auto',
    height: '100vh',
    paddingLeft: 0,
-   // border: 'none',
-   // backgroundColor: 'transparent'
 });
-
-
 
 const ToolWrapper = styled(Box)({
    display: 'flex',
@@ -47,7 +42,6 @@ const ToolWrapper = styled(Box)({
    flexDirection: 'column',
    width: '100%',
    height: 150,
-   // border: '4px solid red'
 });
 const AvatarWrapper = styled(Box)({
    display: 'flex',
@@ -56,7 +50,6 @@ const AvatarWrapper = styled(Box)({
    flexDirection: 'column',
    width: '100%',
    height: 150,
-   // border: '4px solid blue'
 });
 
 const IconMoonWrapper = styled(IconMoon)({
@@ -93,31 +86,30 @@ export default function Navbar() {
    }
    
    return (      
-         <AppBarStyled>
-            <ToolBarStyled>
-               <LogoStyled style={{width: 100}}/>
-               
-               <ToolWrapper>
-                  <ButtonStyled onClick={handleClick}>
-                     {  bg_lighting === 'dark' ? 
-                           <IconSunWrapper />   : 
-                           <IconMoonWrapper />
-                     }
-                  </ButtonStyled> 
-                  <AvatarWrapper>             
-                     <Avatar
-                        alt='user 1'
-                        src={user1}
-                        sx={{ 
-                           width: 40,
-                           height: 40
-                        }}
-                        />
-                  </AvatarWrapper>   
-               </ToolWrapper>
-                              
-            </ToolBarStyled>        
-         </AppBarStyled>
-      
+      <AppBarStyled>
+         <ToolBarStyled>
+            <LogoStyled style={{width: 100}}/>
+            
+            <ToolWrapper>
+               <ButtonStyled onClick={handleClick}>
+                  {  bg_lighting === 'dark' ? 
+                        <IconSunWrapper />   : 
+                        <IconMoonWrapper />
+                  }
+               </ButtonStyled> 
+               <AvatarWrapper>             
+                  <Avatar
+                     alt='user 1'
+                     src={user1}
+                     sx={{ 
+                        width: 40,
+                        height: 40
+                     }}
+                     />
+               </AvatarWrapper>   
+            </ToolWrapper>
+                           
+         </ToolBarStyled>        
+      </AppBarStyled>      
    );
 }

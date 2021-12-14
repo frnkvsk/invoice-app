@@ -37,66 +37,53 @@ const theme = createTheme({
     h1: {
       fontFamily: 'Spartan',
       fontWeight: 700,
-      fontSize: '32px',
+      fontSize: 32,
       lineHeight: '36px',
       letterSpacing: -1,
     },
     h2: {
       fontFamily: 'Spartan',
       fontWeight: 700,
-      fontSize: '20px',
+      fontSize: 20,
       lineHeight: '22px',
       letterSpacing: -0.63
     },
     h3: {
       fontFamily: 'Spartan',
       fontWeight: 700,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '24px',
       letterSpacing: -0.8
     },
     body1: {
       fontFamily: 'Spartan',
       fontWeight: 500,
-      fontSize: '12px',
+      fontSize: 12,
       lineHeight: '15px',
       letterSpacing: 0.25
     },
     body2: {
       fontFamily: 'Spartan',
       fontWeight: 500,
-      fontSize: '11px',
+      fontSize: 11,
       lineHeight: '15px',
       letterSpacing: -0.23
     },
     subtitle1: {
-      fontFamily: 'Raleway',
+      fontFamily: 'Spartan',
       fontWeight: 500,
-      fontStyle: 'italic',
-      fontSize: '0.9rem',
-      color: 'green',
-      lineHeight: 1.1,
+      fontSize: '12px',
+      // lineHeight: '15px',
+      letterSpacing: -0.23
     },
     subtitle2: {
-      fontFamily: 'Raleway',
+      fontFamily: 'Spartan',
       fontWeight: 500,
-      fontSize: '0.9rem',
-      color: 'silver',
-      lineHeight: 1.5,
+      fontSize: '11px',
+      // lineHeight: '15px',
+      letterSpacing: -0.23
     }
   },
-  '@global': {
-    '*::-webkit-scrollbar': {
-      width: '0.4em'
-    },
-    '*::-webkit-scrollbar-track': {
-      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
-    },
-    '*::-webkit-scrollbar-thumb': {
-      backgroundColor: 'rgba(0,0,0,.1)',
-      outline: '1px solid slategrey'
-    }
-  }
 });
 
 export { theme };

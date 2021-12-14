@@ -1,7 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
-
 import { theme } from '../../theme';
 import { ReactComponent as IconPlus } from '../../assets/icon-plus.svg'
 import { Box } from '@mui/system';
