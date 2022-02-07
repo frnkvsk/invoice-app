@@ -89,10 +89,15 @@ const defaultLighting = {
          color: theme.palette.common.dark_4,
          backgroundColor: '#fff'
       },        
-      // color_8: {
-      //    color: theme.palette.common.dark_4,
-      //    backgroundColor: '#fff'
-      // }        
+      color_8: {
+         color: theme.palette.secondary.main,
+         backgroundColor: theme.palette.common.dark_4
+      },        
+      color_9: {
+         color: theme.palette.secondary.main,
+         // backgroundColor: 'blue'
+         backgroundColor: theme.palette.secondary.light
+      }        
    },
    colorDark: {
       color_1: {
@@ -122,6 +127,14 @@ const defaultLighting = {
       color_7: {
          color: theme.palette.common.light_bg,
          backgroundColor: theme.palette.common.dark_3,
-      }     
+      },        
+      color_8: {
+         color: theme.palette.common.dark_4,
+         backgroundColor: theme.palette.secondary.main,         
+      },        
+      color_9: {
+         color: theme.palette.secondary.main,
+         backgroundColor: theme.palette.common.light_bg
+      }  
    },   
 }; 

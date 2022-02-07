@@ -23,10 +23,14 @@ const CardContentStyled = styled(Box)({
    paddingLeft: 10,
    paddingRight: 0, 
    height: '50%',
+   color: theme.palette.secondary.main,
+            ...theme.typography.body1
 });
 const ContainerIdStyled = styled(Container)({
    ...theme.typography.body2,
    width: '15%',
+   color: theme.palette.common.dark_1,           
+                  fontWeight: 700
 });
 const ContainerPaymentDateStyled = styled(Container)({
    ...theme.typography.body2,
@@ -39,6 +43,8 @@ const ContainerClientNameStyled = styled(Container)({
 const ContainerTotalStyled = styled(Container)({
    ...theme.typography.h3,
    width: '20%',
+   color: theme.palette.common.dark_1,
+   textAlign: 'right'
 });
 
 const ButtonArrow = styled(Button)({
@@ -69,8 +75,8 @@ const InvoiceListCard = ({id, paymentDue, clientName, total, status}) => {
          }}>      
          <CardContentStyled>
             <ContainerIdStyled>
-               <span style={{
-                  color: theme.palette.primary.light,
+               <span
+               style={{
                   ...theme.typography.body1
                }}>#</span>{id}
             </ContainerIdStyled>

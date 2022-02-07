@@ -6,8 +6,8 @@ import { Container } from '@mui/material';
 
 import { theme } from './theme';
 import Navbar from './components/nav/navbar-vertical-main/navbarVerticalMain.component';
-import InvoiceList from './pages/invoices/invoice-list.component';
-import Invoice from './pages/invoices/invoice.component';
+import InvoiceList from './pages/invoice-list.page';
+import Invoice from './pages/invoice.page';
 import { LightingContext } from './context/lighting.context';
 
 function App() {

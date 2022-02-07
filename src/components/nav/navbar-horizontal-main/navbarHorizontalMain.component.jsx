@@ -75,7 +75,9 @@ export default function NavbarHorizontalMain({handleMenuSelect, invoiceCount, ha
                      width: '42%',
                   }}>
                   <SelectFilterByStatus handleMenuSelect={handleMenuSelect}/>
-                  <Button1 clickHandler={buttonClickHandler} />
+                  <Button1 clickHandler={buttonClickHandler}>
+                     New Invoice
+                  </Button1>
                </div>                        
             </ToolBarStyled>    
          </AppBarStyled>     

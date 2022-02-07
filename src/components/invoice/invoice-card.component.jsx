@@ -4,7 +4,7 @@ import { Card, Container, Paper  } from '@mui/material';
 import { styled } from '@mui/system';
 
 import { theme } from '../../theme';
-import TableOrders from '../../components/tables/table-orders.component';
+import TableOrders from '../tables/table-orders.component';
 import { LightingContext } from '../../context/lighting.context';
 
 const ContainerHeading = styled(Container)({
@@ -77,6 +77,7 @@ const InvoiceCard = ({id, description, createdAt, paymentDue, senderAddress, cli
             ...lightingState.color_6,
          }}
          >
+         <h1>Invoice Card</h1>
          <ContainerHeading>
             <div>
                <ItemBold style={{...lightingState.color_6}}>

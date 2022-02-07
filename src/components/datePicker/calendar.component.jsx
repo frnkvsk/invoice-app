@@ -36,8 +36,8 @@ const BoxStyled = styled(Box)({
    width: '100%',
 });
 
-export default function Calendar({dateSelected, setDateSelected}) {
-
+export default function Calendar({dateSelected, setDateSelected, setVisible}) {
+   
    const [currentDay, setCurrentDay] = useState(dateSelected.day);
 
    const getDays = n => Array(n).fill(0).map((_,i) => i+1);
@@ -53,7 +53,8 @@ export default function Calendar({dateSelected, setDateSelected}) {
 
    const setNewDate = (e) => {
       setCurrentDay(e);
-      setDateSelected({day: e});      
+      setDateSelected({day: e});  
+      setVisible(false);    
    }
 
    const days = getDays(dateSelected.daysInMonth);
@@ -74,4 +75,6 @@ export default function Calendar({dateSelected, setDateSelected}) {
          {postDays.map(e => <ItemInactive key={e + 'post'}>{e}</ItemInactive>)}        
       </BoxStyled> 
    );
+      
+   
 }

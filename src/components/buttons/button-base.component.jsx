@@ -8,7 +8,7 @@ export const ButtonBase = ({children, clickHandler, otherStyles}) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-around',
-      width: 'auto',
+      // width: 'auto',
       height: 43,
       padding: '5px 18px 5px 18px',
       fontSize: 15,

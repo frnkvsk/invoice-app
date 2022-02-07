@@ -7,7 +7,7 @@ import { ReactComponent as IconPlus } from '../../assets/icon-plus-gray.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon-delete.svg';
 import FormTextField from '../form-textField/form-textField.component';
 import { theme } from '../../theme';
-import { Button6 } from '../buttons/button-6.component';
+import Button6 from '../buttons/button-6.component';
 
 
 const StyledBox = styled(Box)({
@@ -57,10 +57,16 @@ const FormItemList = (props) => {
    }
    const [itemList, setItemList] = useState([]);
 
-   const handleSetItemList = (idx, key, val) => {
-      itemList[idx][key] = val;
-      setItemList([...itemList]);
-      props.handleChange([...itemList])
+   const handleItemListAdd = () => {
+      
+      setItemList([...itemList, {name: '',
+            qty: 0, price: 0, total: 0}]);
+      props.handleChange([...itemList]);
+   }
+
+   const handleItemListRemove = (idx) => {
+      setItemList([...itemList.filter((_,i) => i !== idx)]);
+      props.handleChange([...itemList]);
    }
 
    return (
@@ -131,9 +137,7 @@ const FormItemList = (props) => {
                   style={{
                      paddingTop: idx ? 2 : 14
                   }}                
-                  onClick={() => {
-                     setItemList([...itemList.filter((_,i) => i !== idx)])
-                  }}>
+                  onClick={() => handleItemListRemove(idx)}>
                      <IconWrapper>
                         <IconDelete />
                      </IconWrapper>
@@ -142,10 +146,13 @@ const FormItemList = (props) => {
          ))}
 
          <Button6
-            onClick={() => setItemList([...itemList, {name: '',
-            qty: 0,
-            price: 0,
-            total: 0}])}>
+            clickHandler={handleItemListAdd}
+            otherStyles={{
+               display: 'flex',
+               justifyContent: 'center',
+               width: '100%'
+            }}
+            >
             <IconPlus
               style={{
                 transform: 'scale(0.6, 0.6)',

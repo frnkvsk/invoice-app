@@ -1,29 +1,9 @@
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import { Box } from '@mui/system';
 
 import { theme } from '../../theme';
 import { ReactComponent as IconPlus } from '../../assets/icon-plus.svg'
-import { Box } from '@mui/system';
-
-const ButtonStyled = styled(Button)({
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'space-around',
-   width: 'auto',
-   height: 55,
-   padding: 5,
-   fontSize: 15,
-   fontWeight: 'normal',
-   color: theme.palette.common.light_bg,
-   backgroundColor: theme.palette.primary.main,
-   textTransform: 'none',
-   border: 'none',
-   borderRadius: 30,
-   minWidth: 165,
-   '&:hover': {
-      backgroundColor: theme.palette.primary.light
-   }
-});
+import { ButtonBase } from './button-base.component';
 
 const IconWrapper = styled(Box)({
    display: 'flex',
@@ -37,14 +17,23 @@ const IconWrapper = styled(Box)({
    marginRight: '0.5em' 
 });
 
-const Button1 = ({clickHandler}) => (
-   <ButtonStyled
-      onClick={clickHandler}>
+const Button1 = ({children, clickHandler}) => (
+   <ButtonBase
+      otherStyles={{
+         color: theme.palette.common.light_bg,
+         backgroundColor: theme.palette.primary.main,
+         '&:hover': {
+            backgroundColor: theme.palette.primary.light
+         }
+      }}
+      clickHandler={clickHandler}
+      children={children}
+      >
       <IconWrapper>
          <IconPlus />
-      </IconWrapper>               
-      New Invoice
-   </ButtonStyled>
+      </IconWrapper> 
+         {children}
+      </ButtonBase>  
 );
 
 export default Button1;

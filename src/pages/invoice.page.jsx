@@ -4,11 +4,11 @@ import { useHistory, useLocation } from 'react-router';
 import { styled } from '@mui/system';
 import { Link } from '@mui/material';
 
-import { ReactComponent as IconArrow } from '../../assets/icon-arrow-left.svg';
-import NavbarInvoice from '../../components/nav/navbar-invoice/NavbarInvoice.component';
-import InvoiceCard from './invoice-card.component';
-import { LightingContext } from '../../context/lighting.context';
-import { DataContext } from '../../context/data.context';
+import { ReactComponent as IconArrow } from '../assets/icon-arrow-left.svg';
+import NavbarInvoice from '../components/nav/navbar-invoice/navbarInvoice.component';
+import InvoiceCard from '../components/invoice/invoice-card.component';
+import { LightingContext } from '../context/lighting.context';
+import { DataContext } from '../context/data.context';
 
 
 const ButtonArrow = styled(Link)({

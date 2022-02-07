@@ -35,6 +35,7 @@ const StyledContainer = styled(Box)({
    padding: 0,
  });
 const DatePicker = (props) => {
+   const [visible, setVisible] = useState(true);
    const handleChange = props.handleChange;
    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov', 'Dec'];
    
@@ -69,6 +70,7 @@ const DatePicker = (props) => {
             ...e
          });
       }
+      setVisible(false);
    } 
 
    useEffect(() => {
@@ -77,29 +79,28 @@ const DatePicker = (props) => {
    
    return (
       <StyledContainer>
-      <InputLabel 
-         htmlFor='datePicker'
-         style={{
-            ...theme.typography.body2,
-         }} >Invoice Date</InputLabel>
-      <Popup
-         trigger={
-            <DatePickerStyled>
-               {`${dateSelected.day} ${dateSelected.monthStr} ${dateSelected.year}`}
-               <IconCalendar />
-            </DatePickerStyled>
-         }
-         position='bottom center'
-         on='click'
-         style={{border: '1px solid green'}}
-         >               
-         <DatePickerPopup 
-            id='datePicker'
-            dateSelected={dateSelected} 
-            setDateSelected={setNewDate}
-            style={{border: '1px solid green'}}
-         />
-      </Popup>   
+         <InputLabel 
+            htmlFor='datePicker'
+            style={{
+               ...theme.typography.body2,
+            }} >Invoice Date</InputLabel>
+         <Popup
+            trigger={
+               <DatePickerStyled>
+                  {`${dateSelected.day} ${dateSelected.monthStr} ${dateSelected.year}`}
+                  <IconCalendar />
+               </DatePickerStyled>
+            }
+            position='bottom left'
+            on='click'
+            open={visible}
+            >               
+            <DatePickerPopup 
+               id='datePicker'
+               dateSelected={dateSelected} 
+               setDateSelected={setNewDate}
+            />
+         </Popup>   
       </StyledContainer>
    );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -49,7 +49,7 @@ const ButtonMonthChange = styled(Paper)({
 });
 
 const DatePickerPopup = ({dateSelected, setDateSelected}) => {
-
+   const [visible, setVisible] = useState(true);
    const changeMonthPrevious = () => {
       setDateSelected({month: dateSelected.month - 1});
    }
@@ -57,7 +57,7 @@ const DatePickerPopup = ({dateSelected, setDateSelected}) => {
    const changeMonthNext = () => {
       setDateSelected({month: dateSelected.month + 1});
    }
-   return (
+   return visible ? (
       <BoxStyledWrapper>
          <BoxStyled>
             <div 
@@ -79,11 +79,14 @@ const DatePickerPopup = ({dateSelected, setDateSelected}) => {
                </ButtonMonthChange>
             </div>
             <div style={{width: '100%'}}>
-               <Calendar dateSelected={dateSelected} setDateSelected={setDateSelected}/>
+               <Calendar 
+                  dateSelected={dateSelected} 
+                  setDateSelected={setDateSelected}
+                  setVisible={setVisible}/>
             </div>
          </BoxStyled>
       </BoxStyledWrapper>      
-   );
+   ) : '';
 }
 
 export default DatePickerPopup;

@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import Backdrop from '@mui/material/Backdrop';
 
-import { LightingContext } from '../../context/lighting.context';
-import { DataContext } from '../../context/data.context';
-import NavbarHorizontalMain from '../../components/nav/navbar-horizontal-main/navbarHorizontalMain.component';
-import InvoiceListCard from './invoice-list-card.component';
-import InvoiceListCardEmpty from './invoice-list-card-empty.component';
-import FormNewInvoice from '../../components/form-new-invoice/new-invoice.component';
+import { LightingContext } from '../context/lighting.context';
+import { DataContext } from '../context/data.context';
+import NavbarHorizontalMain from '../components/nav/navbar-horizontal-main/navbarHorizontalMain.component';
+import InvoiceListCard from '../components/invoice/invoice-list-card.component';
+import InvoiceListCardEmpty from '../components/invoice/invoice-list-card-empty.component';
+import FormNewInvoice from '../components/form-new-invoice/form-newInvoice.component';
 import { withStyles } from "@material-ui/core/styles";
 
 const StyledBoxBackdrop = withStyles({
@@ -68,7 +68,7 @@ const InvoiceList = () => {
       }}>
 
       <NavbarHorizontalMain handleMenuSelect={handleMenuSelect} invoiceCount={invoiceCount} handleNewInvoiceFormOpenClose={handleNewInvoiceFormOpenClose}/>
-
+      <h1>Invoice List</h1>
       <div style={{
          display: 'flex',
          alignItems: 'center',
